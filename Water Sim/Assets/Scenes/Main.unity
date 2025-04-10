@@ -152,6 +152,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planeSize: 10
   planeRes: 10
+  waterComputeShader: {fileID: 7200000, guid: 22adb9a6970596843b2a6a19052ec745, type: 3}
+  textureResolution: 256
+  waveAmplitude: 0.1
+  waveFrequency: 1
+  windDirection: {x: 1, y: 0}
+  waterMaterial: {fileID: 2100000, guid: dd14be76510f6b048a3a134bf5d99873, type: 2}
 --- !u!23 &131555545
 MeshRenderer:
   m_ObjectHideFlags: 0

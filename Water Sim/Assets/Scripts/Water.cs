@@ -4,25 +4,38 @@ using UnityEngine.Rendering;
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class Water : MonoBehaviour
 {
+    [Header("Mesh Settings")]
     public int planeSize = 10;
     public int planeRes = 10;
 
-    private Mesh mesh;
+    [Header("Compute Shader Settings")]
+    public ComputeShader waterComputeShader;
+    public int textureResolution = 256;
+    public float waveAmplitude = 1.0f;
+    public float waveFrequency = 10.0f;
+    public Vector2 windDirection = new Vector2(1, 0);
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [Header("Material Settings")]
+    public Material waterMaterial;
+
+    private Mesh mesh;
+    private RenderTexture displacementTexture;
+    private int kernelHandle;
+
     void Start()
     {
-        // The unity object for water has a mesh component, this grabs it so we can have reference to it
+        if (waterMaterial == null) throw new System.Exception("Must have material w/ shader on the water object");
+
         CreateMesh();
+        SetupComputeShader();
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        UpdateComputeShader();
     }
 
-    // The mesh component is empty, this method generates the mesh
+    // Mesh generation method.
     [ContextMenu("Create Mesh")]
     private void CreateMesh()
     {
@@ -85,5 +98,30 @@ public class Water : MonoBehaviour
 
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+    }
+
+    void SetupComputeShader()
+    {
+        displacementTexture = new RenderTexture(textureResolution, textureResolution, 0, RenderTextureFormat.RFloat);
+        displacementTexture.enableRandomWrite = true;
+        displacementTexture.Create();
+
+        // This binds the compute shader to the displacementTexture, so it will change when waterComputeShader.Dispatch() is called. 
+        kernelHandle = waterComputeShader.FindKernel("CS_GenerateWaterMap");
+        waterComputeShader.SetTexture(kernelHandle, "_DisplacementMap", displacementTexture);
+        waterComputeShader.SetInt("_Resolution", textureResolution);
+        
+        waterMaterial.SetTexture("_MainTex", displacementTexture);
+    }
+    void UpdateComputeShader()
+    {
+        waterComputeShader.SetFloat("_Time", Time.time);
+        waterComputeShader.SetFloat("_WaveAmplitude", waveAmplitude);
+        waterComputeShader.SetFloat("_WaveFrequency", waveFrequency);
+        waterComputeShader.SetVector("_WindDirection", windDirection);
+
+        // In the compute shader I have [numthreads(8,8,1)], this is arbitrary, may need to tune later, but this must match the WaterFFT.compute header!!
+        int threadGroups = Mathf.CeilToInt(textureResolution / 8.0f);
+        waterComputeShader.Dispatch(kernelHandle, threadGroups, threadGroups, 1);
     }
 }
