@@ -8,9 +8,9 @@ Shader "Custom/SimpleWater"
         _WaterColor("Water Color", Color) = (0,0.3,0.7,1)     // Basic blue
 
         // Phong shading
-        _AmbientStrength("Ambient Strength", Range(0, 1)) = 1.0
-        _DiffuseStrength("Diffuse Strength", Range(0, 1)) = 1.0
-        _SpecularStrength("Specular Strength", Range(0, 1)) = 1.0
+        _AmbientStrength("Ambient Strength", Range(0, 5)) = 1.0
+        _DiffuseStrength("Diffuse Strength", Range(0, 5)) = 1.0
+        _SpecularStrength("Specular Strength", Range(0, 5)) = 1.0
         _Shininess("Shininess", Range(1, 256)) = 128
 
         // Fresnel
