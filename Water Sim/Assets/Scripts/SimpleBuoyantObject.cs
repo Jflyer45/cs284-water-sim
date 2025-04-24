@@ -1,48 +1,33 @@
-using Unity.Collections;
-using UnityEngine;
-using UnityEngine.Rendering;
-using static Unity.Mathematics.math;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class SimpleBuoyantObject : MonoBehaviour
 {
-    Water water;
+    Rigidbody rb;
+    public float buoyancyStrength = 10f;
+    public float damping = 1f;
 
     void Start()
     {
-        water = FindFirstObjectByType<Water>();
+        rb = GetComponent<Rigidbody>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        Vector3 worldPos = transform.position;
-        Vector2 pos = new Vector2(worldPos.x, worldPos.z);
-        Vector2 uv = worldPos * water.tile1;
+        Vector3 wp = transform.position;
 
-        int x = Mathf.FloorToInt(frac(uv.x) * (water.textureSize - 1));
-        int y = Mathf.FloorToInt(frac(uv.y) * (water.textureSize - 1));
+        float waterH = WaterSurface.Instance.GetHeight(wp.x, wp.z);
 
-        AsyncGPUReadback.Request(
-            water.GetBuoyancyTexture(),
-            0,                          // mip level
-            x, 1,                       // x, width
-            y, 1,                       // y, height
-            0, 1,                       // z (slice), depth (number of slices)
-            OnWaterReadback
-        );
-    }
+        float depth = waterH - wp.y;
+        if (depth <= 0f) return;
 
-    void OnWaterReadback(AsyncGPUReadbackRequest req)
-    {
-        if (req.hasError)
-        {
-            Debug.LogError("GPU readback error");
-            return;
-        }
+        // push up
+        Vector3 Fbuoy = Vector3.up * buoyancyStrength * depth;
+        rb.AddForce(Fbuoy, ForceMode.Force);
 
-        float height = req.GetData<float>()[0];
-
-        Vector3 p = transform.position;
-        p.y = height;
-        transform.position = p;
+        // damp
+        float vY = Vector3.Dot(rb.linearVelocity, Vector3.up);
+        Vector3 Fdamp = Vector3.up * (-damping * vY);
+        rb.AddForce(Fdamp, ForceMode.Force);
     }
 }
