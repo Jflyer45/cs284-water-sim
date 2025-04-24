@@ -15,6 +15,7 @@
 RWTexture2DArray<float4> _SpectrumTextures, _InitialSpectrumTextures, _DisplacementTextures;
 RWTexture2DArray<float2> _SlopeTextures;
 RWTexture2DArray<float4> _FourierTarget;
+RWTexture2D<half> _BuoyancyTexture;
 
 // Simulation parameters
 float _FrameTime, _DeltaTime, _Gravity, _RepeatTime, _Depth, _LowCutoff, _HighCutoff;
@@ -321,5 +322,11 @@ void CS_AssembleMaps(uint3 id : SV_DISPATCHTHREADID)
 
         _DisplacementTextures[uint3(id.xy, i)] = float4(displacement, foam);
         _SlopeTextures[uint3(id.xy, i)] = float2(slopes);
+        
+        // We only care about the first layer's (biggest) y displacement for buoyancy.
+        if (i == 0)
+        {
+            _BuoyancyTexture[id.xy] = displacement.y;
+        }
     }
 }

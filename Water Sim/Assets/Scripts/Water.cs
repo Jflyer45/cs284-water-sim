@@ -88,12 +88,18 @@ public class Water : MonoBehaviour {
     private RenderTexture slopeTextures;
     private RenderTexture initialSpectrumTextures;
     private RenderTexture spectrumTextures;
+    private RenderTexture buoyancyTexture;
 
     private ComputeBuffer spectrumBuffer;
 
     private int threadGroupsX, threadGroupsY;
     private const int NUM_LAYERS = 4;
     private const int NUM_SPECTRUMS_PER_LAYERS = 1;
+
+    public RenderTexture GetBuoyancyTexture()
+    {
+        return buoyancyTexture;
+    }
 
     void Start()
     {
@@ -197,6 +203,7 @@ public class Water : MonoBehaviour {
         displacementTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS, RenderTextureFormat.ARGBHalf, true);
         slopeTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS, RenderTextureFormat.RGHalf, true);
         spectrumTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS * NUM_SPECTRUMS_PER_LAYERS, RenderTextureFormat.ARGBHalf, true);
+        buoyancyTexture = CreateRenderTexture(textureSize, textureSize, 1, RenderTextureFormat.RHalf, false, false);
 
         spectrumBuffer = new ComputeBuffer(NUM_LAYERS * NUM_SPECTRUMS_PER_LAYERS, 8 * sizeof(float));
     }
@@ -279,6 +286,7 @@ public class Water : MonoBehaviour {
         computeShader.SetTexture(5, "_DisplacementTextures", displacementTextures);
         computeShader.SetTexture(5, "_SpectrumTextures", spectrumTextures);
         computeShader.SetTexture(5, "_SlopeTextures", slopeTextures);
+        computeShader.SetTexture(5, "_BuoyancyTexture", buoyancyTexture);
         computeShader.Dispatch(5, threadGroupsX, threadGroupsY, 1);
 
         displacementTextures.GenerateMips();
@@ -316,9 +324,9 @@ public class Water : MonoBehaviour {
         computeShader.SetBuffer(0, "_Spectrums", spectrumBuffer);
     }
 
-    RenderTexture CreateRenderTexture(int width, int height, int depth, RenderTextureFormat format, bool useMips) {
+    RenderTexture CreateRenderTexture(int width, int height, int depth, RenderTextureFormat format, bool useMips, bool useTex2DArray = true) {
         RenderTexture rt = new RenderTexture(width, height, 0, format, RenderTextureReadWrite.Linear);
-        rt.dimension = TextureDimension.Tex2DArray;
+        rt.dimension = useTex2DArray ? TextureDimension.Tex2DArray : TextureDimension.Tex2D;
         rt.filterMode = FilterMode.Bilinear;
         rt.wrapMode = TextureWrapMode.Repeat;
         rt.enableRandomWrite = true;
