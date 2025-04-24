@@ -81,4 +81,17 @@ public class WaterSurface : MonoBehaviour
         float h1 = Mathf.Lerp(h01, h11, tx);
         return Mathf.Lerp(h0, h1, ty);
     }
+
+    public Vector3 GetNormal(float worldX, float worldZ, float offset = 0.1f)
+    {
+        // Get the gradient
+        float hL = GetHeight(worldX - offset, worldZ);
+        float hR = GetHeight(worldX + offset, worldZ);
+        float hD = GetHeight(worldX, worldZ - offset);
+        float hU = GetHeight(worldX, worldZ + offset);
+
+        Vector3 n = new Vector3(hL - hR, 2f * offset, hD - hU);
+        return n.normalized;
+    }
+
 }
