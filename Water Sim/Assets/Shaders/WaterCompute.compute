@@ -298,6 +298,8 @@ void CS_VerticalFFT(uint3 id : SV_DISPATCHTHREADID)
 [numthreads(8, 8, 1)]
 void CS_AssembleMaps(uint3 id : SV_DISPATCHTHREADID)
 {
+    float totalHeight = 0.0f;
+    
     for (int i = 0; i < 4; ++i)
     {
         float4 htildeDisplacement = Permute(_SpectrumTextures[uint3(id.xy, i * 2)], id);
@@ -310,6 +312,7 @@ void CS_AssembleMaps(uint3 id : SV_DISPATCHTHREADID)
         
         float jacobian = (1.0f + _Lambda.x * dxxdzz.x) * (1.0f + _Lambda.y * dxxdzz.y) - _Lambda.x * _Lambda.y * dydxz.y * dydxz.y;
         float3 displacement = float3(_Lambda.x * dxdz.x, dydxz.x, _Lambda.y * dxdz.y);
+        totalHeight += displacement.y;
         float2 slopes = dyxdyz.xy / (1 + abs(dxxdzz * _Lambda));
 
         float foam = _DisplacementTextures[uint3(id.xy, i)].a;
@@ -323,10 +326,7 @@ void CS_AssembleMaps(uint3 id : SV_DISPATCHTHREADID)
         _DisplacementTextures[uint3(id.xy, i)] = float4(displacement, foam);
         _SlopeTextures[uint3(id.xy, i)] = float2(slopes);
         
-        // We only care about the first layer's (biggest) y displacement for buoyancy.
-        if (i == 0)
-        {
-            _BuoyancyTexture[id.xy] = displacement.y;
-        }
+
     }
+    _BuoyancyTexture[id.xy] = totalHeight;
 }

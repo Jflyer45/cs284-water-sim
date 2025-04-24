@@ -203,7 +203,7 @@ public class Water : MonoBehaviour {
         displacementTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS, RenderTextureFormat.ARGBHalf, true);
         slopeTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS, RenderTextureFormat.RGHalf, true);
         spectrumTextures = CreateRenderTexture(textureSize, textureSize, NUM_LAYERS * NUM_SPECTRUMS_PER_LAYERS, RenderTextureFormat.ARGBHalf, true);
-        buoyancyTexture = CreateRenderTexture(textureSize, textureSize, 1, RenderTextureFormat.RHalf, false, false);
+        buoyancyTexture = CreateRenderTexture(textureSize, textureSize, 1, RenderTextureFormat.RFloat, false, false);
 
         spectrumBuffer = new ComputeBuffer(NUM_LAYERS * NUM_SPECTRUMS_PER_LAYERS, 8 * sizeof(float));
     }
