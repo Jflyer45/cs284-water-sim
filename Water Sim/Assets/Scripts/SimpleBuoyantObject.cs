@@ -10,7 +10,6 @@ public class SimpleBuoyantObject : MonoBehaviour
     void Start()
     {
         water = FindFirstObjectByType<Water>();
-
     }
 
     void Update()
@@ -23,12 +22,12 @@ public class SimpleBuoyantObject : MonoBehaviour
         int y = Mathf.FloorToInt(frac(uv.y) * (water.textureSize - 1));
 
         AsyncGPUReadback.Request(
-            water.GetBuoyancyTexture(), // src
+            water.GetBuoyancyTexture(),
             0,                          // mip level
             x, 1,                       // x, width
             y, 1,                       // y, height
             0, 1,                       // z (slice), depth (number of slices)
-            OnWaterReadback             // your callback
+            OnWaterReadback
         );
     }
 
@@ -42,7 +41,7 @@ public class SimpleBuoyantObject : MonoBehaviour
 
         float height = req.GetData<float>()[0];
 
-        var p = transform.position;
+        Vector3 p = transform.position;
         p.y = height;
         transform.position = p;
     }
