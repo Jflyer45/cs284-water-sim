@@ -14,7 +14,7 @@ public class PointFloatersBuoyantObject : MonoBehaviour
     public float[] floatAreas;
 
     [Header("Buoyancy Settings")]
-    public float buoyancyStrength = 1000f;
+    public float buoyancyStrength = 10;
     public float dampingStrength = 0.5f;
 
     [Header("Movement Type")]
