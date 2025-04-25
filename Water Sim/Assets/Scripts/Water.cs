@@ -322,6 +322,8 @@ public class Water : MonoBehaviour {
 
         spectrumBuffer.SetData(spectrums);
         computeShader.SetBuffer(0, "_Spectrums", spectrumBuffer);
+
+        InitSpectrum();
     }
 
     RenderTexture CreateRenderTexture(int width, int height, int depth, RenderTextureFormat format, bool useMips, bool useTex2DArray = true) {
