@@ -13,7 +13,7 @@ public class Water : MonoBehaviour {
 
     [Header("Mesh Settings")]
     public int planeLength = 10;
-    public int planeRes = 10;
+    public int planeRes = 1;
     public int textureSize = 1024;
 
     private Material waterMat;
@@ -185,6 +185,8 @@ public class Water : MonoBehaviour {
 
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
+
+        Debug.Log($"Number of Vertices: {vertices.Length}, Segment Length: {segmentCount}");
     }
 
     void CreateMaterial() {
