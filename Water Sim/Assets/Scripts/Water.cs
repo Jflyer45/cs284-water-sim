@@ -12,6 +12,7 @@ public class Water : MonoBehaviour {
     public ComputeShader computeShader;
 
     [Header("Mesh Settings")]
+    public bool usePreGeneratedMesh = false;
     public int planeLength = 10;
     public int planeRes = 1;
     public int textureSize = 1024;
@@ -103,7 +104,7 @@ public class Water : MonoBehaviour {
 
     void Start()
     {
-        CreateMesh();
+        if(!usePreGeneratedMesh) CreateMesh();
         CreateMaterial();
         CreateTextures();
 
