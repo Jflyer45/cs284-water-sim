@@ -4,6 +4,7 @@ Shader "Custom/Water" {
 		
 	Properties {
 		[Enum(Off, 0, On, 1)] _ZWrite ("Z Write", Float) = 1
+        [Range(0,1)] _Alpha("Transparency", Range(0,1)) = 1
 	}
 
 	CGINCLUDE
@@ -39,13 +40,19 @@ Shader "Custom/Water" {
     ENDCG
 
 	SubShader {
-		Tags {
-			"LightMode" = "ForwardBase"
-		}
+		Tags { 
+        "LightMode"    = "ForwardBase"
+        "Queue"        = "Transparent"
+        "RenderType"   = "Transparent"
+        }
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
 
 		Pass {
 
 			CGPROGRAM
+
+            float _Alpha;
 
 			#pragma vertex dummyvp
 			#pragma hull hp
@@ -312,7 +319,7 @@ Shader "Custom/Water" {
 				finalColor = max(0.0f, finalColor);
 				finalColor = lerp(finalColor, _FoamColor, saturate(foam));
 				
-				return float4(finalColor, 1.0f);
+				return float4(finalColor, _Alpha);
 			}
 
 			ENDCG

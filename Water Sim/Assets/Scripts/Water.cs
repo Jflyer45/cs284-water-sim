@@ -108,7 +108,8 @@ public class Water : MonoBehaviour {
         if (!useVariableResolutionMesh) { CreateMesh(); }
         else { CreateVariableResolutionMesh(); }
 
-        CreateMaterial();
+        waterMat = GetComponent<Renderer>().material;
+        if(waterMat == null) CreateMaterial();
         CreateTextures();
 
         UpdateComputeShaderProperties();
