@@ -1,6 +1,7 @@
 /* 4/21/2025 Derivative of Acerola, gasgiant by proxy. Simplified and changed to integrate our features */
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -12,7 +13,7 @@ public class Water : MonoBehaviour {
     public ComputeShader computeShader;
 
     [Header("Mesh Settings")]
-    public bool usePreGeneratedMesh = false;
+    public bool useVariableResolutionMesh = false;
     public int planeLength = 10;
     public int planeRes = 1;
     public int textureSize = 1024;
@@ -104,7 +105,9 @@ public class Water : MonoBehaviour {
 
     void Start()
     {
-        if(!usePreGeneratedMesh) CreateMesh();
+        if (!useVariableResolutionMesh) { CreateMesh(); }
+        else { CreateVariableResolutionMesh(); }
+
         CreateMaterial();
         CreateTextures();
 
@@ -188,6 +191,99 @@ public class Water : MonoBehaviour {
         mesh.RecalculateNormals();
 
         Debug.Log($"Number of Vertices: {vertices.Length}, Segment Length: {segmentCount}");
+    }
+
+    private void CreateVariableResolutionMesh()
+    {
+        mesh = new Mesh { indexFormat = IndexFormat.UInt32 };
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        // Use the textureSize from inspector
+        int reso = textureSize;
+        float halfSize = planeLength * 0.5f;
+
+        // Create all vertices in a grid
+        Vector3[] vertices = new Vector3[reso * reso];
+        Vector2[] uvs = new Vector2[reso * reso];
+
+        for (int i = 0; i < reso; i++)
+        {
+            for (int j = 0; j < reso; j++)
+            {
+                int index = i * reso + j;
+                float percentX = (float)i / (reso - 1);
+                float percentZ = (float)j / (reso - 1);
+                float posX = percentX * planeLength - halfSize;
+                float posZ = percentZ * planeLength - halfSize;
+
+                vertices[index] = new Vector3(posX, 0f, posZ);
+                uvs[index] = new Vector2(percentX, percentZ);
+            }
+        }
+
+        // Create triangles with variable resolution
+        List<int> triangles = new List<int>();
+        HashSet<int> used = new HashSet<int>();
+
+        int x = 0;
+        int z = 0;
+        int curr = 0;
+        int chunk = reso / 2;
+
+        Debug.Log($"Starting variable resolution mesh creation with reso={reso}, planeLength={planeLength}");
+
+        while (chunk >= 1)
+        {
+            int inc = reso / (chunk * 2);
+            Debug.Log($"Chunk: {chunk}, Inc: {inc}");
+
+            z = curr; // Start z at the current offset
+            while (z < chunk + curr && z < reso)
+            {
+                x = 0;
+                while (x < reso - inc)
+                {
+                    // Compute vertex indices
+                    int topLeft = x * reso + z;
+                    int topRight = x * reso + (z + inc);
+                    int bottomLeft = (x + inc) * reso + z;
+                    int bottomRight = (x + inc) * reso + (z + inc);
+
+                    // Bounds check to avoid any errors
+                    if (topLeft < reso * reso && topRight < reso * reso &&
+                        bottomLeft < reso * reso && bottomRight < reso * reso)
+                    {
+                        // Original triangle order from CreateMesh
+                        triangles.Add(topLeft);
+                        triangles.Add(topRight);
+                        triangles.Add(bottomRight);
+
+                        triangles.Add(topLeft);
+                        triangles.Add(bottomRight);
+                        triangles.Add(bottomLeft);
+
+                        // Mark vertices as used
+                        used.Add(topLeft);
+                        used.Add(topRight);
+                        used.Add(bottomLeft);
+                        used.Add(bottomRight);
+                    }
+
+                    x += inc;
+                }
+                z += inc;
+            }
+            curr += chunk;
+            chunk /= 2;
+        }
+
+        // Set mesh data directly without filtering
+        mesh.vertices = vertices;
+        mesh.uv = uvs;
+        mesh.triangles = triangles.ToArray();
+        mesh.RecalculateNormals();
+
+        Debug.Log($"Variable Resolution Mesh - Vertices: {vertices.Length}, Triangles: {triangles.Count / 3}");
     }
 
     void CreateMaterial() {
