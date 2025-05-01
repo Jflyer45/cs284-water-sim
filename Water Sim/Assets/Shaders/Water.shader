@@ -19,9 +19,46 @@
         _RefractionStrength("Refraction Strength", Range(0, 1)) = 0.25
         _RefractionStrength2("Refraction Strength2", Range(0, 1)) = 0.25
     }
+    CGINCLUDE
+        #define _TessellationEdgeLength 10
+
+        struct TessellationFactors {
+            float edge[3] : SV_TESSFACTOR;
+            float inside : SV_INSIDETESSFACTOR;
+        };
+
+        float CalculateTessellationFactor(float3 controlPoint0, float3 controlPoint1) {
+            float edgeLength = distance(controlPoint0, controlPoint1);
+            float3 edgeCenter = (controlPoint0 + controlPoint1) * 0.5;
+            float viewDistance = distance(edgeCenter, _WorldSpaceCameraPos);
+            
+            float distanceFactor = pow(viewDistance * 0.5f, 1.2f);
+            return edgeLength * _ScreenParams.y / (_TessellationEdgeLength * distanceFactor);
+        }
+
+        bool IsTriangleBelowClipPlane(float3 p0, float3 p1, float3 p2, int planeIndex, float clipBias) {
+            float4 plane = unity_CameraWorldClipPlanes[planeIndex];
+            return dot(float4(p0, 1), plane) < clipBias && 
+                   dot(float4(p1, 1), plane) < clipBias && 
+                   dot(float4(p2, 1), plane) < clipBias;
+        }
+
+        bool ShouldCullTriangle(float3 p0, float3 p1, float3 p2, float clipBias) {
+            return IsTriangleBelowClipPlane(p0, p1, p2, 0, clipBias) ||
+                   IsTriangleBelowClipPlane(p0, p1, p2, 1, clipBias) ||
+                   IsTriangleBelowClipPlane(p0, p1, p2, 2, clipBias) ||
+                   IsTriangleBelowClipPlane(p0, p1, p2, 3, clipBias);
+        }
+    ENDCG
         SubShader
         {
-            Tags { "RenderType" = "Transparent" "Queue" = "Transparent"}
+            Tags { "RenderType" = "Transparent" "Queue" = "Transparent" "LightMode"    = "ForwardBase"
+                    "Queue"        = "Transparent"
+                "RenderType"   = "Transparent"}
+
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+
             LOD 200
             CULL OFF
             // To adjust the color of the background (refraction and fog), we have to retrieve it with GrabPass
