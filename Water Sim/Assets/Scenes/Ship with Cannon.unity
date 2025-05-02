@@ -8245,7 +8245,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -854761393460014835, guid: a307e6cd968b95d4eb6ec35895d5c3e7, type: 3}
+  - {fileID: 2100000, guid: 1e778452283f0c74e935032005d79f5d, type: 2}
   - {fileID: -8739973879626051375, guid: a307e6cd968b95d4eb6ec35895d5c3e7, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -36378,7 +36378,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -854761393460014835, guid: a307e6cd968b95d4eb6ec35895d5c3e7, type: 3}
+  - {fileID: 2100000, guid: 95f806db95aa0a641a7520618dc727a1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -56969,7 +56969,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
   m_LocalPosition: {x: -5.237214, y: 0, z: -5.1980305}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2137406298508341099}
@@ -57040,10 +57040,10 @@ MonoBehaviour:
   localFloatPoints:
   - {x: -1.6495132, y: -5.75398, z: -0.00000047683716}
   - {x: 1.6365166, y: -5.5747824, z: -0.00000047683716}
-  - {x: 1.6397762, y: 6.759379, z: 0.0000009536743}
-  - {x: -1.6337738, y: 6.8547807, z: 0.000038146973}
-  - {x: -2.2897859, y: 0.9819378, z: 0.000037312508}
-  - {x: 2.4005237, y: 0.9819378, z: 0.000037312508}
+  - {x: 1.6397762, y: 6.7267914, z: 0.0000006357829}
+  - {x: -1.6337738, y: 6.822192, z: 0.000038146973}
+  - {x: -2.289786, y: 0.98193735, z: 0.000037272774}
+  - {x: 2.4005237, y: 0.98193735, z: 0.000037272774}
   floatAreas:
   - 0
   buoyancyStrength: 10
