@@ -19969,6 +19969,63 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1001 &2741918360779834956
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -30.518442
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.126473
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3746135463801034574, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5886304242385056004, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
+      propertyPath: m_Name
+      value: SmokeEffect
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
 --- !u!137 &2742811454485916884
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -52986,6 +53043,7 @@ GameObject:
   - component: {fileID: 4851709600315712169}
   - component: {fileID: 4131350426511065303}
   - component: {fileID: 919132149205197998}
+  - component: {fileID: 9168425258945223341}
   m_Layer: 0
   m_Name: Ship Pinnace
   m_TagString: Untagged
@@ -53328,7 +53386,7 @@ GameObject:
   - component: {fileID: 7697790110586262609}
   - component: {fileID: 7697790110586262610}
   m_Layer: 0
-  m_Name: Stanford ship
+  m_Name: ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57039,8 +57097,8 @@ MonoBehaviour:
   localFloatPoints:
   - {x: -1.6495132, y: -5.75398, z: -0.00000047683716}
   - {x: 1.6365166, y: -5.5747824, z: -0.00000047683716}
-  - {x: 1.6397762, y: 6.723671, z: 0.0000006357829}
-  - {x: -1.6337738, y: 6.819072, z: 0.000038146973}
+  - {x: 1.6397762, y: 6.7267914, z: 0.0000006357829}
+  - {x: -1.6337738, y: 6.822192, z: 0.000038146973}
   - {x: -2.289786, y: 0.98193735, z: 0.000037272774}
   - {x: 2.4005237, y: 0.98193735, z: 0.000037272774}
   floatAreas:
@@ -67160,6 +67218,26 @@ Transform:
   - {fileID: 341524605}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9168425258945223341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6933534445789431106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 954e0231d851f604eb944fc281efd4fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forwardForce: 10
+  turnForce: 1
+  strafeForce: 3
+  reverseForce: 5
+  movementEnabled: 1
+  forceApplicationPoint: {fileID: 9168425258945223340}
+  stabilizationTorque: 1
+  maxVelocityMagnitude: 15
 --- !u!4 &9179677073913696699
 Transform:
   m_ObjectHideFlags: 0
@@ -67427,3 +67505,4 @@ SceneRoots:
   - {fileID: 963194228}
   - {fileID: 223698529}
   - {fileID: 7697790110586262607}
+  - {fileID: 2741918360779834956}

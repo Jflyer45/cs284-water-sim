@@ -4,6 +4,7 @@ using System.Collections;
 public class Cannon : MonoBehaviour
 {
     public GameObject cannonBallPrefab;
+    public GameObject smokePrefab;  // New smoke prefab variable
     public Transform spawnPoint;
     public Transform aimPoint;
     public float muzzleVelocity = 30f;
@@ -116,8 +117,21 @@ public class Cannon : MonoBehaviour
             Debug.LogWarning("Fire effect not assigned to cannon.");
         }
 
+        // Instantiate the cannonball
         var ball = Instantiate(cannonBallPrefab, spawnPoint.position, Quaternion.LookRotation(direction));
         var rb = ball.GetComponent<Rigidbody>();
         if (rb) rb.linearVelocity = direction.normalized * muzzleVelocity;
+
+        // Instantiate smoke in world space
+        if (smokePrefab != null)
+        {
+            // Create smoke at the spawn point in world space
+            // By not specifying a parent, the smoke stays in world space and won't follow the ship
+            Instantiate(smokePrefab, spawnPoint.position, Quaternion.LookRotation(direction));
+        }
+        else
+        {
+            Debug.LogWarning("Smoke prefab not assigned to cannon.");
+        }
     }
 }

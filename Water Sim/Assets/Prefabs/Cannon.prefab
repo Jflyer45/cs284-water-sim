@@ -310,6 +310,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cannonBallPrefab: {fileID: 5688027314844862684, guid: 12d3bb6e3d795b24fa59382eb02888c2, type: 3}
+  smokePrefab: {fileID: 5886304242385056004, guid: 20517cda4fee260449b2d08e254c5408, type: 3}
   spawnPoint: {fileID: 8549344051986893583}
   aimPoint: {fileID: 1488489716939379563}
   muzzleVelocity: 100
