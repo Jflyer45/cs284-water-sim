@@ -7066,8 +7066,11 @@ PlayableDirector:
     value: {fileID: 677654017}
   - key: {fileID: -968490915161642415, guid: a2dd86a7f2c53354299f462d2ac00efb, type: 2}
     value: {fileID: 926306011}
+  - key: {fileID: 9177880823687357391, guid: a2dd86a7f2c53354299f462d2ac00efb, type: 2}
+    value: {fileID: 1443241381}
   m_ExposedReferences:
     m_References:
+    - dd2494ab4eedad444a8913b30d7b8fa0: {fileID: 1551209483}
     - 8dac211d324debd45a38910e27e074e1: {fileID: 1443241375}
     - 97dae7076e155454fa6ff24e14410760: {fileID: 166186955}
     - 5db1851009bf5014ea71a383934a10e4: {fileID: 427675320}
@@ -46631,13 +46634,14 @@ GameObject:
   - component: {fileID: 1443241379}
   - component: {fileID: 1443241378}
   - component: {fileID: 1443241377}
+  - component: {fileID: 1443241381}
   m_Layer: 0
   m_Name: Lined up Stanford ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1443241377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46654,7 +46658,7 @@ MonoBehaviour:
   - {x: -1.6495132, y: -5.75398, z: -0.00000047683716}
   - {x: 1.6365166, y: -5.5747824, z: -0.00000047683716}
   - {x: 1.6397856, y: 6.7251797, z: -0.020719528}
-  - {x: -1.6338468, y: 6.8205485, z: -0.038251244}
+  - {x: -1.6338468, y: 6.820545, z: -0.048405968}
   - {x: -2.3829632, y: 1.6055616, z: 0.00034983954}
   - {x: 2.4009805, y: 0.98188436, z: -0.012113929}
   floatAreas:
@@ -46729,6 +46733,28 @@ Transform:
   - {fileID: 551432150}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -89.98, y: -8.7, z: 0.2}
+--- !u!95 &1443241381
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1443241375}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ddeaab3fd48ad7a4c8e9a2589f387978, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1449319980
 GameObject:
   m_ObjectHideFlags: 0
