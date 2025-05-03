@@ -222,7 +222,7 @@ MonoBehaviour:
   waterShader: {fileID: 4800000, guid: 16bcf694f2309c143b77d97af3b9cc8d, type: 3}
   computeShader: {fileID: 7200000, guid: 9b59da7d74bb689429dab3b1e55bec89, type: 3}
   useVariableResolutionMesh: 0
-  planeLength: 100
+  planeLength: 250
   planeRes: 10
   textureSize: 1024
   seed: 112
@@ -595,7 +595,7 @@ MonoBehaviour:
   waterShader: {fileID: 4800000, guid: 16bcf694f2309c143b77d97af3b9cc8d, type: 3}
   computeShader: {fileID: 7200000, guid: 9b59da7d74bb689429dab3b1e55bec89, type: 3}
   useVariableResolutionMesh: 0
-  planeLength: 100
+  planeLength: 250
   planeRes: 10
   textureSize: 1024
   seed: 3018
@@ -1561,6 +1561,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.59
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.59
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.59
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1599,6 +1611,10 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -2577548232221058511, guid: e582e166c35597e4ba38776f6fdd9488, type: 3}
       propertyPath: m_LocalScale.x
