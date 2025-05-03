@@ -61,6 +61,11 @@ public class PointFloatersBuoyantObject : MonoBehaviour
         }
     }
 
+    public void SetBouyancy(float amount)
+    {
+        buoyancyStrength = amount;
+    }
+
     void OnDrawGizmosSelected()
     {
         if (localFloatPoints == null) return;
