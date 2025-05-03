@@ -71,9 +71,5 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX Legacy Materials.unitypackage.meta
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX Standard Materials.unitypackage.meta
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX URP 2019.3.1f1 Upgrade.unitypackage.meta
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX URP 2019.3.1f1 Upgrade.unitypackage.meta
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX Standard Materials.unitypackage.meta
-Wargame Unity Project/Assets/RTS Effects/Upgrades/RTS FX Legacy Materials.unitypackage.meta
+
+Water Sim/Recordings
