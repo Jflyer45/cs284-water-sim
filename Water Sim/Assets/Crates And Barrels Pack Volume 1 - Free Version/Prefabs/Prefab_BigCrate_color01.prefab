@@ -44,8 +44,8 @@ Rigidbody:
   m_GameObject: {fileID: 1223915382249154}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -84,7 +84,7 @@ MonoBehaviour:
   - {x: 0.4, y: 0.55, z: 0.85}
   - {x: 0.4, y: 0, z: 0.85}
   floatAreas: []
-  buoyancyStrength: 10
+  buoyancyStrength: 8
   dampingStrength: 0.5
   movementType: 0
 --- !u!65 &203350416487370145
