@@ -15338,7 +15338,7 @@ MonoBehaviour:
   - {x: 2.4009805, y: 0.98188436, z: -0.012113929}
   floatAreas:
   - 0
-  buoyancyStrength: 10
+  buoyancyStrength: 5
   dampingStrength: 0.5
   movementType: 0
 --- !u!54 &444281595
@@ -15350,7 +15350,7 @@ Rigidbody:
   m_GameObject: {fileID: 444281592}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 1
   m_AngularDrag: 50
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -38075,7 +38075,7 @@ MonoBehaviour:
   lengthScale1: 94
   tile1: 0.01
   spectrum1:
-    scale: 0.1
+    scale: 0.77
     windSpeed: 2
     windDirection: 22
     fetch: 100000
@@ -38086,7 +38086,7 @@ MonoBehaviour:
   lengthScale2: 128
   tile2: 0.01
   spectrum2:
-    scale: 0
+    scale: 0.24
     windSpeed: 20
     windDirection: 97
     fetch: 100000000
