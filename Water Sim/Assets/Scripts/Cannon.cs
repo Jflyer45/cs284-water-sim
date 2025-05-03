@@ -33,9 +33,14 @@ public class Cannon : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isResetting)
         {
-            float delay = Random.Range(0f, maxDelay);
-            StartCoroutine(FireWithDelay(delay));
+            FireWithDelayPublic();
         }
+    }
+
+    public void FireWithDelayPublic()
+    {
+        float delay = Random.Range(0f, maxDelay);
+        StartCoroutine(FireWithDelay(delay));
     }
 
     IEnumerator FireWithDelay(float delay)
