@@ -221,7 +221,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waterShader: {fileID: 4800000, guid: 16bcf694f2309c143b77d97af3b9cc8d, type: 3}
   computeShader: {fileID: 7200000, guid: 9b59da7d74bb689429dab3b1e55bec89, type: 3}
-  planeLength: 100
+  useVariableResolutionMesh: 0
+  planeLength: 500
   planeRes: 10
   textureSize: 1024
   seed: 0
