@@ -1,4 +1,4 @@
-﻿Shader "Custom/Caustics"
+Shader "Custom/Caustics"
 {
     Properties
     {
@@ -16,6 +16,11 @@
         _SplitRGB("SplitRGB", Float) = 10
         _MaxHeight("Maximum Height", Float) = 10
         _Intensity("Intensity", Float) = 3
+
+        [Header(Cutoff Transition)]
+        _TransitionWidth("Transition Width", Range(0,5)) = 0.5 // Determines width of transition/cutoff area
+        _TransitionSoftness("Transition Softness", Range(0,1)) = 0.5 // Determines smoothness of transition cutoff
+        _WaterPlaneOffset("Water Plane Offset", Float) = 0.0 // Offset value from _MaxHeight
     }
     SubShader
     {
@@ -37,6 +42,7 @@
         // We will split RGB components to get that effect.
         // _MaxHeight is there to limit caustics not to go above water and _Intensity provides strength of the output color
         float _SplitRGB, _MaxHeight, _Intensity;
+        float _TransitionWidth, _TransitionSoftness, _WaterPlaneOffset;
 
         struct Input
         {
@@ -48,6 +54,15 @@
         half _Glossiness;
         half _Metallic;
         fixed4 _Color;
+
+        float customSmoothstep(float edge1, float edge2, float x, float smoothness) {
+            // Adjust the edges based on smoothness factor
+            float adjustedEdge1 = edge1 - smoothness * (edge2 - edge1);
+            float adjustedEdge2 = edge2 + smoothness * (edge2 - edge1);
+
+            // Apply smoothstep with the adjusted edges
+            return smoothstep(adjustedEdge1, adjustedEdge2, x);
+        }
 
         float3 caustics(float2 uvTex) {
             // ------------ First caustics sampling ----------------
@@ -78,12 +93,16 @@
             // Sample Main texture and multiply it with Color
             fixed4 c = tex2D (_MainTex, uv) * _Color;
             o.Albedo = c.rgb;
-            // If fragment Y position is not above _MaxHeight (water) apply caustics
-            if (IN.worldPos.y < _MaxHeight)
-                // Caustics will end on clear line at _MaxHeight which we dont want
-                // So we add second multiplicator to fade caustics as it is closer to _MaxHeight
-                o.Albedo.rgb += caustics(IN.uv_MainTex) * abs(min(1, ((_MaxHeight - IN.worldPos.y) / _MaxHeight))) * 2;
 
+            // Calculate water level with offset and transition
+            float waterLevel = _MaxHeight + _WaterPlaneOffset;
+            float heightDifference = waterLevel - IN.worldPos.y;
+            float transitionFactor = customSmoothstep(0, _TransitionWidth, heightDifference, _TransitionSoftness);
+
+            // Apply caustics with soft transition
+            if (transitionFactor > 0.01) { // Small threshold to skip calculations when not visible
+                o.Albedo.rgb += caustics(IN.uv_MainTex) * transitionFactor;
+            }
             o.Metallic = _Metallic;
             o.Smoothness = _Glossiness;
             o.Alpha = c.a;
