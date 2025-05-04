@@ -490,7 +490,7 @@ Transform:
   m_GameObject: {fileID: 375674284}
   serializedVersion: 2
   m_LocalRotation: {x: -0.04093766, y: -0.1654041, z: -0.0068719164, w: 0.9853519}
-  m_LocalPosition: {x: 6.73, y: 10.61, z: -49.59}
+  m_LocalPosition: {x: 8.8, y: 7.37, z: -52.82}
   m_LocalScale: {x: 1, y: 2.1513, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -830,7 +830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44f0ed66aa1c54f40809cfd70da52fce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.24
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 44f0ed66aa1c54f40809cfd70da52fce, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1203,7 +1203,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1041813777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2088,7 +2088,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2045306881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2255,13 +2255,13 @@ MonoBehaviour:
   localFloatPoints:
   - {x: -0.06256642, y: 0.02, z: 0}
   - {x: 0.06311738, y: 0.02, z: 0}
-  - {x: 0.05462216, y: 0.02, z: -0.082601115}
-  - {x: -0.05458805, y: 0.02, z: -0.08261773}
-  - {x: -0.018798275, y: 0.02, z: 0.1354648}
-  - {x: 0.02231586, y: 0.02, z: 0.13327917}
+  - {x: 0.05462216, y: 0.019999972, z: -0.082601115}
+  - {x: -0.05458805, y: 0.019999972, z: -0.08261773}
+  - {x: -0.03544602, y: 0.019999972, z: 0.1354648}
+  - {x: 0.035446018, y: 0.019999972, z: 0.13327917}
   floatAreas: []
   buoyancyStrength: 5
-  dampingStrength: 10
+  dampingStrength: 15
   movementType: 0
 --- !u!54 &919132148568749990
 Rigidbody:
@@ -2272,8 +2272,8 @@ Rigidbody:
   m_GameObject: {fileID: 919132148568749987}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 10
-  m_AngularDrag: 10
+  m_Drag: 20
+  m_AngularDrag: 30
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -2308,8 +2308,8 @@ Cloth:
   m_UseTethers: 1
   m_UseGravity: 1
   m_Damping: 0
-  m_ExternalAcceleration: {x: 0, y: 0, z: 0}
-  m_RandomAcceleration: {x: 0, y: 0, z: 0}
+  m_ExternalAcceleration: {x: -1.5, y: 0, z: -0.64}
+  m_RandomAcceleration: {x: -13.43, y: 0, z: 0}
   m_WorldVelocityScale: 0.5
   m_WorldAccelerationScale: 1
   m_Friction: 0.5
