@@ -106,7 +106,6 @@ public class Water : MonoBehaviour {
     void Start()
     {
         if (!useVariableResolutionMesh) { CreateMesh(); }
-        else { CreateVariableResolutionMesh(); }
 
         CreateMaterial();
         CreateTextures();

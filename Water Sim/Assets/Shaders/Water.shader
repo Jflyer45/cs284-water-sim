@@ -220,6 +220,7 @@ Shader "Custom/Water" {
 				return p;
 			}
             
+            /*
             TessellationFactors PatchFunction(InputPatch<TessellationControlPoint, 3> patch) {
                 float3 p0 = mul(unity_ObjectToWorld, patch[0].vertex);
                 float3 p1 = mul(unity_ObjectToWorld, patch[1].vertex);
@@ -237,6 +238,19 @@ Shader "Custom/Water" {
                 }
                 return factors;
             }
+            */
+
+            TessellationFactors PatchFunction(InputPatch<TessellationControlPoint, 3> patch)
+            {
+                TessellationFactors f;
+                // Force exactly one triangle per patch (no subdivision)
+                f.edge[0] = 1;
+                f.edge[1] = 1;
+                f.edge[2] = 1;
+                f.inside  = 1;
+                return f;
+            }
+
 
             [UNITY_domain("tri")]
             [UNITY_outputcontrolpoints(3)]
