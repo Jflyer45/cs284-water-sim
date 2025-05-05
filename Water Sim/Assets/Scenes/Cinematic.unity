@@ -29228,7 +29228,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &881039576
 AudioListener:
   m_ObjectHideFlags: 0
@@ -29270,7 +29270,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 31
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -29296,13 +29296,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 881039575}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.14280169, y: 0, z: 0, w: 0.98975134}
+  m_LocalRotation: {x: 0.21532537, y: 0.20725332, z: -0.046820592, w: 0.9531468}
   m_LocalPosition: {x: 121, y: 81.1, z: -29.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 16.42, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 25.46, y: 24.535, z: 0}
 --- !u!95 &881039579
 Animator:
   serializedVersion: 7
@@ -38613,7 +38613,7 @@ MonoBehaviour:
   waterShader: {fileID: 4800000, guid: 16bcf694f2309c143b77d97af3b9cc8d, type: 3}
   computeShader: {fileID: 7200000, guid: 9b59da7d74bb689429dab3b1e55bec89, type: 3}
   useVariableResolutionMesh: 0
-  planeLength: 800
+  planeLength: 1750
   planeRes: 1
   textureSize: 1024
   seed: 0
