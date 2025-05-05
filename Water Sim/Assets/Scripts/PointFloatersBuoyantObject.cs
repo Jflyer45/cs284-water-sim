@@ -66,6 +66,11 @@ public class PointFloatersBuoyantObject : MonoBehaviour
         buoyancyStrength = amount;
     }
 
+    public void ReduceBouyancy(float amount)
+    {
+        buoyancyStrength = Mathf.Max(0f, buoyancyStrength - amount);
+    }
+
     void OnDrawGizmosSelected()
     {
         if (localFloatPoints == null) return;
